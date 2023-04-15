@@ -1,3 +1,40 @@
 body {
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+}
+
+#display {
+    height: 10%;
+    width: 50%;
+    background-color: grey;
+}
+
+button {
+    font-size: 40px;
+}
+
+#display {
+    background-color: white;
+
+}
+
+.main-color {
+    background-color: grey;
+    color: aqua;
+}
+
+.off-color {
+    background-color: orangered;
+    color: white;
 }
