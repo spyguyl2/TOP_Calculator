@@ -96,21 +96,7 @@ function display(number) {
     displayValue.push(number);
     calcDisplay.textContent = displayValue.join('');
 }
-/*
-function selectOperatorButton(element) {
-    const operators = [buttonDivide, buttonPlus, buttonMinus, buttonMultiply];
-    for (i = 0; i < operators.length; i++) {
-        if (element === operators[i]) {
-            operators[i].classList.add('selected');
-            operators[i].classList.remove('off-color');
-        }
-        else {
-            operators[i].classList.add('off-color');
-            operators[i].classList.remove('selected');
-        }
-    };
-}
-*/
+
 function selectOperatorButton(element) {
     const operators = [buttonDivide, buttonPlus, buttonMinus, buttonMultiply];
     operators.forEach(operator => {
@@ -124,32 +110,6 @@ function selectOperatorButton(element) {
         }
     });
 }
-/* leaving for example
-function selectOperatorButtonTEST(element) {
-        if (buttonDivide === element) {
-            buttonDivide.classList.add('selected');
-            buttonDivide.classList.remove('off-color');
-            buttonMinus.classList.add('off-color');
-            buttonMinus.classList.remove('selected');
-            buttonPlus.classList.add('off-color');
-            buttonPlus.classList.remove('selected');
-            buttonMultiply.classList.add('off-color');
-            buttonMultiply.classList.remove('selected');
-        }
-        else if (buttonMultiply === element) {
-            element.classList.add('off-color');
-            element.classList.remove('selected');
-        }
-        else if (buttonPlus === element) {
-            element.classList.add('off-color');
-            element.classList.remove('selected');
-        }
-        else if (buttonMinus === element) {
-            element.classList.add('off-color');
-            element.classList.remove('selected');
-        }
-}
-*/
 
 function operate(firstNumber, operator, secondNumber) {
     if (operator === "+") add(firstNumber, secondNumber);
