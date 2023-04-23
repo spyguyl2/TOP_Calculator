@@ -35,18 +35,7 @@ for (let i = 0; i < 10; i++) {
 }
 //rest of buttons           ***Should these be in an array? The same array? Just the operators together??***
 buttonClear.addEventListener('click', () => {
-    firstNumber = 0;
-    secondNumber = 0;
-    operator = "";
-    calcDisplay.textContent = "";
-    displayValue = [];
-    firstNumberEntered = false;
-    secondNumberEntered = false;
-
-    operators.forEach(element => {
-        element.classList.add('off-color');
-        element.classList.remove('selected');
-    });
+    resetAllValues();
 });
 buttonMultiply.addEventListener('click', () => {
     selectOperatorButton(buttonMultiply);
@@ -100,7 +89,18 @@ function divide(a, b) {
 //#endregion
 
 function resetAllValues() {
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = "";
+    calcDisplay.textContent = "";
+    displayValue = [];
+    firstNumberEntered = false;
+    secondNumberEntered = false;
 
+    operators.forEach(element => {
+        element.classList.add('off-color');
+        element.classList.remove('selected');
+    });
 }
 
 function display(number) {
