@@ -1,4 +1,4 @@
-//#region Global variables
+//#region Core variables
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
@@ -23,6 +23,8 @@ const buttonMinus = buttons[15];
 const buttonDivide = buttons[16];
 //#endregion
 
+//array of operator buttons. Currently used in resetAllValues() and selectOperatorButton()
+const operators = [buttonDivide, buttonPlus, buttonMinus, buttonMultiply];
 
 //#region Button click events
 //this covers all number buttons
@@ -40,6 +42,11 @@ buttonClear.addEventListener('click', () => {
     displayValue = [];
     firstNumberEntered = false;
     secondNumberEntered = false;
+
+    operators.forEach(element => {
+        element.classList.add('off-color');
+        element.classList.remove('selected');
+    });
 });
 buttonMultiply.addEventListener('click', () => {
     selectOperatorButton(buttonMultiply);
@@ -54,8 +61,8 @@ buttonEqual.addEventListener('click', () => {
     
 });
 buttonMinus.addEventListener('click', () => {
-    selectOperatorButton(buttonMinus);
-    /*if (displayValue.length > 0 || operator === "+" || operator === "-" 
+    
+    if (displayValue.length > 0 || operator === "+" || operator === "-" 
         || operator === "*" || operator === "/") 
     {
         selectOperatorButton(buttonMinus);
@@ -66,7 +73,7 @@ buttonMinus.addEventListener('click', () => {
         }
         else if (firstNumberEntered = true) operator = "-";
     }
-    else return; */
+    else return;
     
 });
 buttonDivide.addEventListener('click', () => {
@@ -92,13 +99,16 @@ function divide(a, b) {
 }
 //#endregion
 
+function resetAllValues() {
+
+}
+
 function display(number) {
     displayValue.push(number);
     calcDisplay.textContent = displayValue.join('');
 }
 
 function selectOperatorButton(element) {
-    const operators = [buttonDivide, buttonPlus, buttonMinus, buttonMultiply];
     operators.forEach(operator => {
         if (operator === element) {
             operator.classList.add('selected');
