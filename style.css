@@ -5,6 +5,14 @@ body {
     align-items: center;
 }
 
+.selected {
+    border-width: 2px;
+    border-color: purple;
+    border-style: solid;
+    background-color: rgb(180, 77, 61);
+    color: white;
+}
+
 #container {
     display: flex;
     flex-direction: column;
