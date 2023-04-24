@@ -51,8 +51,7 @@ buttonEqual.addEventListener('click', () => {
 });
 buttonMinus.addEventListener('click', () => {
     
-    if (displayValue.length > 0 || operator === "+" || operator === "-" 
-        || operator === "*" || operator === "/") 
+    if (displayValue.length > 0 || operator != "") 
     {
         selectOperatorButton(buttonMinus);
         if (firstNumberEntered === false) {
@@ -87,6 +86,8 @@ function divide(a, b) {
     return a / b;
 }
 //#endregion
+
+
 
 function resetAllValues() {
     firstNumber = 0;
