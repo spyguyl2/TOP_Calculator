@@ -38,10 +38,10 @@ buttonClear.addEventListener('click', () => {
     resetAllValues();
 });
 buttonMultiply.addEventListener('click', () => {
-    selectOperatorButton(buttonMultiply);
+    selectOperatorButton(buttonMultiply,'*');
 });
 buttonPlus.addEventListener('click', () => {
-    selectOperatorButton(buttonPlus);
+    selectOperatorButton(buttonPlus, '+');
 });
 buttonDecimal.addEventListener('click', () => {
     
@@ -50,22 +50,10 @@ buttonEqual.addEventListener('click', () => {
     
 });
 buttonMinus.addEventListener('click', () => {
-    
-    if (displayValue.length > 0 || operator != "") 
-    {
-        selectOperatorButton(buttonMinus);
-        if (firstNumberEntered === false) {
-            firstNumber = parseInt(calcDisplay.textContent);
-            operator = "-";
-            firstNumberEntered = true;
-        }
-        else if (firstNumberEntered = true) operator = "-";
-    }
-    else return;
-    
+    selectOperatorButton(buttonMinus, '-');
 });
 buttonDivide.addEventListener('click', () => {
-    selectOperatorButton(buttonDivide);
+    selectOperatorButton(buttonDivide, '/');
 });
 //#endregion
 
@@ -104,22 +92,33 @@ function resetAllValues() {
     });
 }
 
-function display(number) {
-    displayValue.push(number);
+function display(value) {
+    displayValue.push(value);
     calcDisplay.textContent = displayValue.join('');
 }
 
-function selectOperatorButton(element) {
-    operators.forEach(operator => {
-        if (operator === element) {
-            operator.classList.add('selected');
-            operator.classList.remove('off-color');
+function selectOperatorButton(element, operatorString) {
+    if (displayValue.length > 0 || operator != "") 
+    {
+        operators.forEach(operator => {
+            if (operator === element) {
+                operator.classList.add('selected');
+                operator.classList.remove('off-color');
+            }
+            else {
+                operator.classList.add('off-color');
+                operator.classList.remove('selected');
+            }
+        });
+        if (firstNumberEntered === false) {
+            firstNumber = parseInt(calcDisplay.textContent);
+            operator = operatorString;
+            firstNumberEntered = true;
         }
-        else {
-            operator.classList.add('off-color');
-            operator.classList.remove('selected');
-        }
-    });
+        else if (firstNumberEntered = true) operator = operatorString;
+    }
+    else return;
+    
 }
 
 function operate(firstNumber, operator, secondNumber) {
