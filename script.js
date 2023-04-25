@@ -47,11 +47,13 @@ buttonDecimal.addEventListener('click', () => {
     
 });
 buttonEqual.addEventListener('click', () => {
+    
     secondNumber = parseInt(calcDisplay.textContent);
     secondNumberEntered = true;
     displayValue = [];
     if (operator === '' || firstNumber === '' || secondNumber === '') return;
     else operate(firstNumber, operator, secondNumber);
+    firstNumber = calcDisplay.textContent
 });
 buttonMinus.addEventListener('click', () => {
     selectOperatorButton(buttonMinus, '-');
@@ -75,10 +77,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0 || b === '0') {
-        calcDisplay.textContent = "You can't divide by 0!"
-    }
-    else return a / b;
+    return a / b;
 }
 //#endregion
 
@@ -138,6 +137,11 @@ function operate(firstNumber, operator, secondNumber) {
     if (operator === "+") display(add(firstNumber, secondNumber));
     else if (operator === "-") display(subtract(firstNumber, secondNumber));
     else if (operator === "*") display(multiply(firstNumber, secondNumber));
-    else if (operator === "/") display(divide(firstNumber, secondNumber));
+    else if (operator === "/") {
+        if (secondNumber === 0 || secondNumber === '0') {
+            calcDisplay.textContent = "You can't divide by 0!"
+        }
+        else display(divide(firstNumber, secondNumber));
+    }
     else console.error('The operate function is FLAWED!');
 }
