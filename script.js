@@ -49,6 +49,9 @@ buttonDecimal.addEventListener('click', () => {
 buttonEqual.addEventListener('click', () => {
     if (operator === '' || firstNumber === '' || secondNumber === '') return;
     else operate(firstNumber, operator, secondNumber);
+    console.log(firstNumber);
+    console.log(secondNumber);
+    console.log(operator);
 });
 buttonMinus.addEventListener('click', () => {
     selectOperatorButton(buttonMinus, '-');
@@ -72,7 +75,10 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    if (b === 0) {
+        calcDisplay.textContent = "You can't divide by 0!"
+    }
+    else return a / b;
 }
 //#endregion
 
@@ -99,8 +105,12 @@ function display(value) {
 }
 
 function selectOperatorButton(element, operatorString) {
-    if (displayValue.length > 0 || operator != "") 
+    //ensure at least one number was entered 
+    //OR that an operator was selected, meaning there is already a number to be operated on
+    //OR the first number was already entered
+    if (displayValue.length > 0 || operator != "" || !firstNumberEntered) 
     {
+        //highlight selected operator button
         operators.forEach(operator => {
             if (operator === element) {
                 operator.classList.add('selected');
@@ -111,12 +121,14 @@ function selectOperatorButton(element, operatorString) {
                 operator.classList.remove('selected');
             }
         });
-        if (firstNumberEntered === false) {
-            firstNumber = parseInt(calcDisplay.textContent);
-            operator = operatorString;
-            firstNumberEntered = true;
-        }
-        else if (firstNumberEntered = true) operator = operatorString;
+        //removed if (!firstNumberEntered) added if (!firstNumberEntered) above.    
+        //If the firstNumberEntered is false above, it should just return.
+        firstNumber = parseInt(calcDisplay.textContent);
+        calcDisplay.textContent = '';
+        displayValue = [];
+        operator = operatorString;
+        firstNumberEntered = true;
+        //else if (firstNumberEntered) operator = operatorString;
     }
     else return;
     
