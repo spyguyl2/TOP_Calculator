@@ -1,6 +1,6 @@
 //#region Core variables
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = '';
+let secondNumber = '';
 let operator = "";
 let displayValue = [];
 let firstNumberEntered = false;
@@ -47,7 +47,8 @@ buttonDecimal.addEventListener('click', () => {
     
 });
 buttonEqual.addEventListener('click', () => {
-    
+    if (operator === '' || firstNumber === '' || secondNumber === '') return;
+    else operate(firstNumber, operator, secondNumber);
 });
 buttonMinus.addEventListener('click', () => {
     selectOperatorButton(buttonMinus, '-');
@@ -122,9 +123,9 @@ function selectOperatorButton(element, operatorString) {
 }
 
 function operate(firstNumber, operator, secondNumber) {
-    if (operator === "+") add(firstNumber, secondNumber);
-    else if (operator === "-") subtract(firstNumber, secondNumber);
-    else if (operator === "*") multiply(firstNumber, secondNumber);
-    else if (operator === "/") divide(firstNumber, secondNumber);
+    if (operator === "+") display(add(firstNumber, secondNumber));
+    else if (operator === "-") display(subtract(firstNumber, secondNumber));
+    else if (operator === "*") display(multiply(firstNumber, secondNumber));
+    else if (operator === "/") display(divide(firstNumber, secondNumber));
     else console.error('The operate function is FLAWED!');
 }
