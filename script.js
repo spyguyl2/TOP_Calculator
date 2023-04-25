@@ -47,11 +47,11 @@ buttonDecimal.addEventListener('click', () => {
     
 });
 buttonEqual.addEventListener('click', () => {
+    secondNumber = parseInt(calcDisplay.textContent);
+    secondNumberEntered = true;
+    displayValue = [];
     if (operator === '' || firstNumber === '' || secondNumber === '') return;
     else operate(firstNumber, operator, secondNumber);
-    console.log(firstNumber);
-    console.log(secondNumber);
-    console.log(operator);
 });
 buttonMinus.addEventListener('click', () => {
     selectOperatorButton(buttonMinus, '-');
@@ -75,7 +75,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (b === 0) {
+    if (b === 0 || b === '0') {
         calcDisplay.textContent = "You can't divide by 0!"
     }
     else return a / b;
