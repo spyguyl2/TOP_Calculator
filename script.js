@@ -4,7 +4,6 @@ let secondNumber = '';
 let operator = "";
 let displayValue = [];
 let firstNumberEntered = false;
-let secondNumberEntered = false;
 //#endregion
 
 
@@ -49,7 +48,6 @@ buttonDecimal.addEventListener('click', () => {
 buttonEqual.addEventListener('click', () => {
     
     secondNumber = parseInt(calcDisplay.textContent);
-    secondNumberEntered = true;
     displayValue = [];
     if (operator === '' || firstNumber === '' || secondNumber === '') return;
     else operate(firstNumber, operator, secondNumber);
@@ -90,7 +88,6 @@ function resetAllValues() {
     calcDisplay.textContent = "";
     displayValue = [];
     firstNumberEntered = false;
-    secondNumberEntered = false;
 
     operators.forEach(element => {
         element.classList.add('off-color');
