@@ -14,6 +14,7 @@ const buttons = [];
 for (let i = 0; i < 17; i++) {
     buttons[i] = document.querySelector('#btn' + i);
 }
+//map the operating buttons to readable variables
 const buttonClear = buttons[10];
 const buttonMultiply = buttons[11];
 const buttonPlus = buttons[12];
@@ -30,6 +31,7 @@ const operators = [buttonDivide, buttonPlus, buttonMinus, buttonMultiply];
 //this covers all number buttons
 for (let i = 0; i < 10; i++) {
     buttons[i].addEventListener('click', () => {
+        if (equalPressed) resetAllValues();
         display(i);
         equalPressed = false;
     });
@@ -45,14 +47,14 @@ buttonPlus.addEventListener('click', () => {
     selectOperatorButton(buttonPlus, '+');
 });
 buttonDecimal.addEventListener('click', () => {
-    
+    if (displayValue.find(decimal => decimal === '.')) return;
+    else display('.');
 });
 buttonEqual.addEventListener('click', () => {
     if (equalPressed) return;
     else {
         if (operator === '' || firstNumber === '' || calcDisplay.textContent === '') return;
         else {
-            equalPressed = true;
             displayValue = [];
             operate(firstNumber, operator, parseInt(calcDisplay.textContent));
             firstNumber = calcDisplay.textContent
@@ -60,6 +62,7 @@ buttonEqual.addEventListener('click', () => {
             resetAllValues();
             firstNumber = temp;
             display(firstNumber);
+            equalPressed = true;
         }
     }
 });
@@ -132,6 +135,7 @@ function selectOperatorButton(element, operatorString) {
         displayValue = [];
         operator = operatorString;
         firstNumberEntered = true;
+        equalPressed = false;
     }
     else return;
     
