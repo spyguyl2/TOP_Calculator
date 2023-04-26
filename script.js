@@ -4,6 +4,7 @@ let secondNumber = '';
 let operator = "";
 let displayValue = [];
 let firstNumberEntered = false;
+let equalPressed = false;
 //#endregion
 
 
@@ -30,6 +31,7 @@ const operators = [buttonDivide, buttonPlus, buttonMinus, buttonMultiply];
 for (let i = 0; i < 10; i++) {
     buttons[i].addEventListener('click', () => {
         display(i);
+        equalPressed = false;
     });
 }
 //rest of buttons           ***Should these be in an array? The same array? Just the operators together??***
@@ -46,12 +48,20 @@ buttonDecimal.addEventListener('click', () => {
     
 });
 buttonEqual.addEventListener('click', () => {
-    
-    secondNumber = parseInt(calcDisplay.textContent);
-    displayValue = [];
-    if (operator === '' || firstNumber === '' || secondNumber === '') return;
-    else operate(firstNumber, operator, secondNumber);
-    firstNumber = calcDisplay.textContent
+    if (equalPressed) return;
+    else {
+        if (operator === '' || firstNumber === '' || calcDisplay.textContent === '') return;
+        else {
+            equalPressed = true;
+            displayValue = [];
+            operate(firstNumber, operator, parseInt(calcDisplay.textContent));
+            firstNumber = calcDisplay.textContent
+            let temp = firstNumber;
+            resetAllValues();
+            firstNumber = temp;
+            display(firstNumber);
+        }
+    }
 });
 buttonMinus.addEventListener('click', () => {
     selectOperatorButton(buttonMinus, '-');
@@ -88,6 +98,7 @@ function resetAllValues() {
     calcDisplay.textContent = "";
     displayValue = [];
     firstNumberEntered = false;
+    equalPressed = false;
 
     operators.forEach(element => {
         element.classList.add('off-color');
@@ -102,9 +113,8 @@ function display(value) {
 
 function selectOperatorButton(element, operatorString) {
     //ensure at least one number was entered 
-    //OR that an operator was selected, meaning there is already a number to be operated on
-    //OR the first number was already entered
-    if (displayValue.length > 0 || operator != "" || !firstNumberEntered) 
+    //AND an operator is not selected yet
+    if (displayValue.length > 0 && operator === "") 
     {
         //highlight selected operator button
         operators.forEach(operator => {
@@ -117,14 +127,11 @@ function selectOperatorButton(element, operatorString) {
                 operator.classList.remove('selected');
             }
         });
-        //removed if (!firstNumberEntered) added if (!firstNumberEntered) above.    
-        //If the firstNumberEntered is false above, it should just return.
         firstNumber = parseInt(calcDisplay.textContent);
         calcDisplay.textContent = '';
         displayValue = [];
         operator = operatorString;
         firstNumberEntered = true;
-        //else if (firstNumberEntered) operator = operatorString;
     }
     else return;
     
