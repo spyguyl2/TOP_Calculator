@@ -7,7 +7,6 @@ let firstNumberEntered = false;
 let equalPressed = false;
 //#endregion
 
-
 //#region Set querySelectors
 const calcDisplay = document.querySelector('#display');
 const buttons = [];
@@ -56,7 +55,7 @@ buttonEqual.addEventListener('click', () => {
         if (operator === '' || firstNumber === '' || calcDisplay.textContent === '') return;
         else {
             displayValue = [];
-            operate(firstNumber, operator, parseInt(calcDisplay.textContent));
+            operate(firstNumber, operator, parseFloat(calcDisplay.textContent));
             firstNumber = calcDisplay.textContent
             let temp = firstNumber;
             resetAllValues();
@@ -130,7 +129,7 @@ function selectOperatorButton(element, operatorString) {
                 operator.classList.remove('selected');
             }
         });
-        firstNumber = parseInt(calcDisplay.textContent);
+        firstNumber = parseFloat(calcDisplay.textContent);
         calcDisplay.textContent = '';
         displayValue = [];
         operator = operatorString;
